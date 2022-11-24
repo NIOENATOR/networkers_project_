@@ -11,12 +11,12 @@ const employee = require("../models/employee.model")
 //crear Employee
 router.post("/create-employee", async (req, res) =>{
     
-    let {name, pay, description, image, keyWords} = req.body
+    let {name, lastName, email, password, age, city, country, occupation} = req.body
 
     const newEmployee = new employee(req.body)
     await newEmployee.save()
 
-    return res.status(201).json({msg: "Oferta Networkers guardada con exito"})
+    return res.status(201).json({msg: "Registro Networkers exitoso"})
 })
 
 //Listar Employee
@@ -34,7 +34,7 @@ router.get("/get-employee", async (req, res) => {
 router.delete("/delete-employee", async (req, res) =>{
 
     await employee.findByIdAndDelete(req.query.id)
-    return res.status(200).json({msg: "Producto eliminado", id: req.query.id})
+    return res.status(200).json({msg: "Oferta eliminada", id: req.query.id})
 
 })
 
@@ -44,7 +44,7 @@ router.delete("/delete-employee", async (req, res) =>{
 router.put("/update-employee", async (req, res) => {
 
     await employee.findByIdAndUpdate(req.query.id, {$set: req.body})
-    res.status(200).json({msg: "Producto actualizado exitosamente"})
+    res.status(200).json({msg: "Oferta actualizada exitosamente"})
 })
 
 

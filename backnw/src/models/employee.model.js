@@ -11,10 +11,13 @@ const { Schema } = mongoose
 const employeeSchema = new Schema(
     {
         name: { type: String, required: true},
-        pay: { type: Number, required: true},
-        description: { type: String, required: true},
-        image: { type: String, default: "Sin imagen adjunta"},
-        keyWords: { type: Array, default: []},
+        lastName: { type: String, required: true},
+        email: { type: String, required: true},
+        password: { type: String, required: true},
+        age: { type: Number, required: true},
+        city: { type: String, required: true},
+        country: { type: String, required: true},
+        occupation: { type: String, required: true},
     },
 
     {
