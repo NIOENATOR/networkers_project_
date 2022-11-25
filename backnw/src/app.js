@@ -18,7 +18,7 @@ app.get("/api", (req, res) => {
 app.use("/employee", require("./routes/employee"))
 
 //user routes
-//app.use("/user", require("./routes/user"))
+app.use("/user", require("./routes/user"))
 
 
 app.listen(port, () => {console.log("Api corriendo en el pueto", port)})
