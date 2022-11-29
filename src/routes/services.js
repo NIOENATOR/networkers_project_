@@ -3,7 +3,7 @@ const router = express.Router()
 
 
 //importar modelo
-const employee = require("../models/employee.model")
+const employee = require("../models/services.model")
 
 
 // rutas

@@ -15,7 +15,7 @@ app.get("/api", (req, res) => {
 })
 
 //app.use(/activadorDeRutas, importacion de las rutas que se pueden usar con esta ruta)
-app.use("/employee", require("./routes/employee"))
+app.use("/services", require("./routes/services"))
 
 //user routes
 app.use("/user", require("./routes/user"))
