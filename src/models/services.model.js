@@ -10,14 +10,11 @@ const { Schema } = mongoose
 // 3 crear el schema
 const servicesSchema = new Schema(
     {
-        name: { type: String, required: true},
-        lastName: { type: String, required: true},
-        email: { type: String, required: true},
-        password: { type: String, required: true},
-        age: { type: Number, required: true},
-        city: { type: String, required: true},
-        country: { type: String, required: true},
-        occupation: { type: String, required: true},
+        tittle: { type: String, required: true},
+        price: { type: Number, required: true},
+        description: { type: String, required: true},
+        image: { type: String, default: "Sin imagen adjunta"},
+        keyWords: { type: Array, default: []},
     },
 
     {

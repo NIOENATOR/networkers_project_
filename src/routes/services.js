@@ -3,48 +3,48 @@ const router = express.Router()
 
 
 //importar modelo
-const employee = require("../models/services.model")
+const services = require("../models/services.model")
 
 
 // rutas
 
-//crear Employee
-router.post("/create-employee", async (req, res) =>{
+//crear services
+router.post("/create-services", async (req, res) =>{
     
-    let {name, lastName, email, password, age, city, country, occupation} = req.body
+    let { tittle, price, description, image, keyWords } = req.body
 
-    const newEmployee = new employee(req.body)
-    await newEmployee.save()
+    const newServices = new services(req.body)
+    await newServices.save()
 
-    return res.status(201).json({msg: "Registro Networkers exitoso"})
+    return res.status(201).json({msg: "Servicio creado exitosamente"})
 })
 
-//Listar Employee
+//Listar services
 
-router.get("/get-employee", async (req, res) => {
+router.get("/get-services", async (req, res) => {
 
-    const employees = await employee.find()
-    return res.status(200).json({data: employees})
-
-})
-    
-
-//eliminar Employee
-
-router.delete("/delete-employee", async (req, res) =>{
-
-    await employee.findByIdAndDelete(req.query.id)
-    return res.status(200).json({msg: "Empleado eliminado eliminada", id: req.query.id})
+    const servicess = await services.find()
+    return res.status(200).json({data: servicess})
 
 })
+    //pp**//
+
+//eliminar services
+
+router.delete("/delete-services", async (req, res) =>{
+
+    await services.findByIdAndDelete(req.query.id)
+    return res.status(200).json({msg: "Servicio elimidado satisfactoriamente", id: req.query.id})
+
+})
 
 
-//Actualizar Employee
+//Actualizar services
 
-router.put("/update-employee", async (req, res) => {
+router.put("/update-services", async (req, res) => {
 
-    await employee.findByIdAndUpdate(req.query.id, {$set: req.body})
-    res.status(200).json({msg: "Oferta actualizada exitosamente"})
+    await services.findByIdAndUpdate(req.query.id, {$set: req.body})
+    res.status(200).json({msg: "Servicio actualizado exitosamente"})
 })
 
 
