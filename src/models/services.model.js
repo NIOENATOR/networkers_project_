@@ -15,6 +15,7 @@ const servicesSchema = new Schema(
         description: { type: String, required: true},
         image: { type: String, default: "Sin imagen adjunta"},
         keyWords: { type: Array, default: []},
+        phoneNumber: {type: Number, default: 0}
     },
 
     {

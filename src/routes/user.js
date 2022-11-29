@@ -1,5 +1,6 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
+const jwt = require ("jsonwebtoken");
 
 
 //importar modelo
@@ -9,14 +10,16 @@ const user = require("../models/user.model")
 // rutas
 
 //crear usuario
-router.post("/create-user", async (req, res) =>{
+router.post("/signup", async (req, res) =>{
     
     let { email } = req.body
 
     email = email.toLowerCase ()
     req.body.email = email
 
-    let userExists = await user.find({email: email})
+    //obtenber los usuarios que tienen ese email
+    let userExists = await user.find({ email: { $eq: email } });
+    console.log(userExists);
 
 
     if (userExists.length !== 0) {
@@ -24,10 +27,10 @@ router.post("/create-user", async (req, res) =>{
     }
 
     const newUser = new user(req.body)
-    await newUser.save()
+    await newUser.save();
 
-    return res.status(201).json({msg: "Registro Networkers exitoso"})
-})
+    return res.status(201).json({msg: "Registro en Networkers exitoso"});
+});
 
 //Listar Usuarios
 
@@ -57,5 +60,55 @@ router.put("/update-user", async (req, res) => {
     res.status(200).json({msg: "Usuario actualizado exitosamente"})
 })
 
+
+
+
+router.post("/login", async (req, res) => {
+    try {
+      // bloque de codigo
+      // trhow levanta una excepcion para levantar
+  
+      // {
+      //     email:
+      //     password:
+      // }
+  
+       //revisar si el usuario existe
+       const user = await user.find({email: req.body.email})
+  
+       if(user.length > 0){
+          // revisar si la contraseña es correcta
+          const isPass = req.body.password === user[0].password// true - correcta || false - incorrecta
+  
+          if(isPass){
+              let {name, lastName, email, _id} = user[0]
+  
+              let payload = {
+                  _id: _id.toString(), //convertir el id de objectID a string
+                  name,
+                  lastName,
+                  email,
+              }
+  
+              console.log(payload)
+  
+              // sucess - generar el token
+              const token = jwt.sign(payload, "llave-secreta")
+              return res.status(200).json({token: token})
+          }
+          // error- la contraseña es incorrecta
+          return res.status(401).json({msg: "La contraseña es incorrecta"})
+       }
+      return res.status(401).json({msg: "El usuario no existe"})
+  
+    // error- la cuenta no existe
+  
+    } catch (error) {
+      console.log(error);
+      // bloque de codigo en el catch
+    }
+  });
+  
+  
 //exportar las rutas
 module.exports = router
