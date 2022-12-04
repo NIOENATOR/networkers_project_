@@ -11,7 +11,7 @@ const services = require("../models/services.model")
 //crear services
 router.post("/create-services", async (req, res) =>{
     
-    let { tittle, price, description, image, keyWords } = req.body
+    let { title, price, description, image, keyWords } = req.body
 
     const newServices = new services(req.body)
     await newServices.save()

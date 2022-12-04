@@ -10,7 +10,7 @@ const { Schema } = mongoose
 // 3 crear el schema
 const servicesSchema = new Schema(
     {
-        tittle: { type: String, required: true},
+        title: { type: String, required: true},
         price: { type: Number, required: true},
         description: { type: String, required: true},
         image: { type: String, default: "Sin imagen adjunta"},
