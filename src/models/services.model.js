@@ -14,7 +14,7 @@ const servicesSchema = new Schema(
         price: { type: Number, required: true},
         description: { type: String, required: true},
         image: { type: String, default: "Sin imagen adjunta"},
-        keyWords: { type: Array, default: []},
+        keywords: { type: String, default: ""},
         phoneNumber: {type: Number, default: 0}
     },
 
